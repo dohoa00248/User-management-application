@@ -22,9 +22,22 @@ const User = sequelize.define('User', {
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 2,  // 2: user, 1: admin
+    },
+    firstName: {
+        type: DataTypes.STRING
+    },
+    lastName: {
+        type: DataTypes.STRING
     }
+
 }, {
     timestamps: true,
+    indexes: [
+        {
+            unique: true,
+            fields: ['username']
+        }
+    ]
 });
 
 export default User;

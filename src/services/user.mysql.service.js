@@ -9,13 +9,11 @@ const insertUser = async (userData) => {
 
         const query = "INSERT INTO USERS (username, password, role) VALUES (?, ?, ?)";
 
-        let [user] = await pool.query(query, [username, password, role]);
+        const [user] = await pool.query(query, [username, password, role]);
 
         return user;
     } catch (error) {
         console.log("Failed to create user:", error.message);
-
-        return null;
     }
 }
 
@@ -28,13 +26,13 @@ const findUserById = async (userId) => {
         const query = "SELECT * FROM USERS WHERE id = ?";
 
         let [userById, fields] = await pool.query(query, [id]);
+        console.log("Check userById:", userById);
         userById = userById && userById.length > 0 ? userById[0] : {};
-
+        console.log("Check userById[0]:", userById);
         return userById;
 
     } catch (error) {
         console.error("Failed to find user by ID.", error.message);
-        return {}
     }
 }
 const updateUserById = async (userId, userData) => {
@@ -43,11 +41,11 @@ const updateUserById = async (userId, userData) => {
 
         const pool = await dbConnect.connectToMySQL();
 
-        const query = "UPDATE users SET username = ?, password = ?, role = ?, updatedAt = ? WHERE id = ?";
+        const query = "UPDATE users SET password = ?, firstName = ?,  lastName = ?, updatedAt = ? WHERE id = ?";
 
-        const { username, password, role } = userData;
+        const { password, firstName, lastName } = userData;
 
-        let [updateUserResult] = await pool.query(query, [username, password, role, new Date(), id]);
+        const [updateUserResult] = await pool.query(query, [password, firstName, lastName, new Date(), id]);
 
         return updateUserResult;
 
@@ -63,7 +61,7 @@ const deleteUserById = async (userId) => {
 
         const query = "DELETE FROM USERS WHERE id = ?";
 
-        let [deleteUser] = await pool.query(query, [id]);
+        const [deleteUser] = await pool.query(query, [id]);
 
         return deleteUser;
     } catch (error) {
@@ -78,7 +76,7 @@ const findAllUsers = async () => {
 
         const query = "SELECT * FROM users";
 
-        let [users, fields] = await pool.query(query);
+        const [users, fields] = await pool.query(query);
 
         return users;
 
@@ -90,7 +88,7 @@ const findAllUsers = async () => {
 export default {
     insertUser,
     findUserById,
-    findAllUsers,
     updateUserById,
-    deleteUserById
+    deleteUserById,
+    findAllUsers
 }

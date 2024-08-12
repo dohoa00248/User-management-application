@@ -2,14 +2,14 @@
 import User from "../models/user.mongoose.model.js";
 const saveUser = async (userData) => {
     try {
-        const { username, password, role } = userData;
+        const { username, password, role, firstName, lastName } = userData;
 
         if (!username || !password) {
             return;
         }
 
         else {
-            const newUser = new User({ username, password, role });
+            const newUser = new User({ username, password, role, firstName, lastName });
             const saveUser = await newUser.save();
 
             if (!saveUser) {
@@ -44,7 +44,8 @@ const findUserById = async (userId) => {
 const findUserByIdAndUpdate = async (userId, userData) => {
     try {
         const { id } = userId;
-        const updateUserResult = await User.findByIdAndUpdate(id, userData, { new: true });
+        const { firstName, lastName } = userData;
+        const updateUserResult = await User.findByIdAndUpdate(id, { firstName, lastName }, { new: true });
 
         if (!updateUserResult) {
             return;

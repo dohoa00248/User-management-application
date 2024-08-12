@@ -3,10 +3,10 @@ import dbConnect from "../config/db.connect.js";
 
 const insertOneUser = async (userData) => {
     try {
-        const { username, password, role } = userData;
+        const { username, password, role, firstName, lastName } = userData;
 
         if (!username || !password) {
-            return;
+            return null;
         }
 
         const db = await dbConnect.connectToMongoDB();
@@ -15,12 +15,10 @@ const insertOneUser = async (userData) => {
         const user = await userCollection.insertOne({
             username,
             password,
-            role
+            role,
+            firstName,
+            lastName
         });
-
-        if (!user) {
-            return;
-        }
 
         return user;
     } catch (error) {
@@ -28,14 +26,14 @@ const insertOneUser = async (userData) => {
     }
 }
 
-const findOneUserById = async (id) => {
+const findOneUserById = async (userId) => {
     try {
         const db = await dbConnect.connectToMongoDB();
         const userCollection = db.collection("users");
 
-        const userIdObj = new ObjectId(id);
+        const userIdObj = new ObjectId(userId);
         const user = await userCollection.findOne({ _id: userIdObj });
-        
+
         return user;
     } catch (error) {
         console.log("Failed to find user by ID.", error.message);
@@ -47,7 +45,7 @@ const findOneUserAndUpdate = async (userId, userData) => {
         const { id } = userId;
         const userObjetId = new ObjectId(id);
 
-        const { username, password, role } = userData;
+        const { username, password, role, firstName, lastName } = userData;
 
         const db = await dbConnect.connectToMongoDB();
         const userCollection = db.collection("users");
@@ -56,7 +54,9 @@ const findOneUserAndUpdate = async (userId, userData) => {
             $set: {
                 username,
                 password,
-                role
+                role,
+                firstName,
+                lastName
             }
         }
 

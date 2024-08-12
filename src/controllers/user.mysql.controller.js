@@ -4,7 +4,12 @@ import userService from "../services/user.mysql.service.js";
 
 const createUser = async (req, res) => {
     try {
-        const userData = req.body;
+        const { username, password, role } = req.body;
+        const userData = { username, password, role };
+
+        //c2 giảm tham số truyền vào
+        // const userData = req.body;
+
         // console.log(userData);
 
         if (!userData.username || !userData.password || !userData.role) {
@@ -23,13 +28,13 @@ const createUser = async (req, res) => {
             return res.status(400).json({
                 status: false,
                 message: "Failed to create user.",
+                error: "Invalid or duplicate data.",
                 user: {}
             });
         }
 
         else {
             console.log("User created successfully.");
-
             return res.status(201).json({
                 status: true,
                 message: "User created successfully.",
@@ -49,28 +54,20 @@ const createUser = async (req, res) => {
 
 const getUserById = async (req, res) => {
     try {
-        //Cú Pháp Truyền Tham Số Truy Vấn. 
-        const userId = req.params;
-        console.log("Check userId", userId);
+        //Cú Pháp Truyền Tham Số Truy Vấn.
+        const { id } = req.params;
+        const userId = { id };
+        // console.log("Check userId:", userId);
         // Gọi dịch vụ để lấy thông tin người dùng theo ID
         const userById = await userService.findUserById(userId);
-        console.log("Check userById", userById);
-        // Cú Pháp Phân Rã Đối Tượng c2 lấy thuộc tính id và đổi tên được gán vào userId 
-        // const { id } = req.params;
-        // Gọi dịch vụ để lấy thông tin người dùng theo ID
-        // const userById = await userService.findUserById(id);
+        console.log("Check userById:", userById);
 
-        // Cú Pháp Phân Rã Đối Tượng lấy thẳng trực tiếp vào thuộc tính id
-        // const { id } = req.params;
-        // Gọi dịch vụ để lấy thông tin người dùng theo ID
-        // const userById = await userService.getUserById(id);
-
-
-        if (!userById[0]) {
+        if (!userById) {
             // Nếu không tìm thấy người dùng
+            console.log("User not found.");
             return res.status(404).json({
                 status: false,
-                message: "User not found",
+                message: "User not found.",
                 user: {}
             });
         }
@@ -95,9 +92,14 @@ const getUserById = async (req, res) => {
 
 const updateUser = async (req, res) => {
     try {
-        const userId = req.params;
+        const { id } = req.params;
+        const userId = { id };
         console.log(userId);
-        const userData = req.body;
+
+        const { password, firstName, lastName } = req.body;
+        const userData = { password, firstName, lastName }
+        //c2
+        // const userData = req.body;
 
         console.log("Received userData:", userData);
 
@@ -108,9 +110,10 @@ const updateUser = async (req, res) => {
 
         if (updateUserResult.changedRows === 0) {
             // Nếu không tìm thấy người dùng để cập nhật
-            return res.status(404).json({
+            return res.status(400).json({
                 status: false,
-                message: "Failed to update user or user not found.",
+                message: "Failed to update user.",
+                error: "Invalid or duplicate data or User not found.",
                 user: {}
             });
         }
@@ -134,7 +137,11 @@ const updateUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
     try {
-        const userId = req.params;
+        const { id } = req.params;
+        const userId = { id };
+
+        //c2
+        // const userId = req.params;
         console.log(userId);
         // Xóa người dùng theo ID
         const deleteUserResult = await userService.deleteUserById(userId);
@@ -170,10 +177,21 @@ const deleteUser = async (req, res) => {
 const getAllUsers = async (req, res) => {
     try {
         // Gọi dịch vụ để lấy tất cả người dùng
-        const users = await userService.findAllUsers();
-
+        const usersArr = await userService.findAllUsers();
+        console.log("Check users:", users);
+        if (!users || users.length === 0) {
+            return res.status(404).json({
+                status: false,
+                message: "No users found.",
+                users: []
+            });
+        }
         // Gửi phản hồi thành công với danh sách người dùng
-        return res.status(200).json({ status: true, users });
+        return res.status(200).json({
+            status: true,
+            message: "Users retrieved successfully",
+            users: usersArr
+        });
 
     } catch (error) {
         // Xử lý lỗi và gửi phản hồi lỗi

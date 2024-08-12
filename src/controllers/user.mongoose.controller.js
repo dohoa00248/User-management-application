@@ -6,7 +6,11 @@ const getUserPage = async (req, res) => {
 const createUser = async (req, res) => {
     //c1
     try {
-        const userData = req.body;
+        const { username, password } = req.body
+        const userData = { username, password };
+
+        //c2
+        // const userData = req.body;
         console.log(userData);
 
         if (!userData.username || !userData.password) {
@@ -25,6 +29,7 @@ const createUser = async (req, res) => {
             return res.status(400).json({
                 status: false,
                 message: "Failed to create user.",
+                error: "Invalid or duplicate data.",
                 user: {}
             });
         }
@@ -49,15 +54,13 @@ const createUser = async (req, res) => {
 const getUserById = async (req, res) => {
     try {
         //c1
-        const userId = req.params; // Sử dụng req.params thay vì req.body vì ID được truyền qua URL
+        const { id } = req.params;
+        const userId = { id }; // Sử dụng req.params thay vì req.body vì ID được truyền qua URL
         console.log(userId);
-        //c2
-        // const id = req.params.id;
-        // const user = await User.findById(id);
         const userById = await userService.findUserById(userId);
 
         if (!userById) {
-            // console.log("User not found.");
+            console.log("User not found.");
             return res.status(404).json({
                 status: false,
                 message: "User not found.",
@@ -65,8 +68,8 @@ const getUserById = async (req, res) => {
             });
         }
         else {
-            // console.log("User found successfully.");
-            // console.log("User:", userById);
+            console.log("User found successfully.");
+            console.log("User:", userById);
             return res.status(200).json({
                 status: true,
                 message: "User found successfully.",
@@ -85,16 +88,24 @@ const getUserById = async (req, res) => {
 }
 const updateUser = async (req, res) => {
     try {
-        const userId = req.params;
-        const userData = req.body;
+        const { id } = req.params;
+        const userId = { id };
+
+        const { firstName, lastName } = req.body;
+        const userData = { firstName, lastName };
+
+        //c2
+        // const userData = req.body;
         console.log(userData);
+
         const updateUserResult = await userService.findUserByIdAndUpdate(userId, userData);
 
         if (!updateUserResult) {
-            console.log("Failed to update user or user not found.");
+            console.log("Failed to update user.");
             return res.status(400).json({
                 status: false,
-                message: "Failed to update user or user not found.",
+                message: "Failed to update user.",
+                error: "Invalid or duplicate data or User not found.",
                 user: {}
             });
         }
@@ -117,7 +128,8 @@ const updateUser = async (req, res) => {
 }
 const deleteUser = async (req, res) => {
     try {
-        const userId = req.params;
+        const { id } = req.params;
+        const userId = { id };
 
         const deleteUserResult = await userService.findUserByIdAndDelete(userId);
 
@@ -151,6 +163,7 @@ const getAllUsers = async (req, res) => {
     try {
         const usersArray = await userService.findAllUsers();
         console.log("Users:", usersArray);
+
         if (!usersArray || usersArray.length === 0) {
             return res.status(404).json({
                 status: false,
