@@ -1,7 +1,9 @@
 import userService from "../services/user.mongoose.service.js";
 
-const getUserPage = async (req, res) => {
-    res.send("Hello user");
+const getHomeUserPage = async (req, res) => {
+    // res.send("Hello user");
+    const users = await userService.findAllUsers();
+    return res.render("home.ejs", { userList: users });
 }
 const createUser = async (req, res) => {
     //c1
@@ -70,12 +72,14 @@ const getUserById = async (req, res) => {
         else {
             console.log("User found successfully.");
             console.log("User:", userById);
+
             return res.status(200).json({
                 status: true,
                 message: "User found successfully.",
                 user: userById
             });
         }
+
     } catch (error) {
         console.log("Failed to find user by ID.", error.message);
         return res.status(500).json({
@@ -91,8 +95,8 @@ const updateUser = async (req, res) => {
         const { id } = req.params;
         const userId = { id };
 
-        const { firstName, lastName } = req.body;
-        const userData = { firstName, lastName };
+        const { password, firstName, lastName } = req.body;
+        const userData = { password, firstName, lastName };
 
         //c2
         // const userData = req.body;
@@ -190,10 +194,10 @@ const getAllUsers = async (req, res) => {
 }
 
 export default {
-    getUserPage,
+    getHomeUserPage,
     createUser,
     getUserById,
     updateUser,
     deleteUser,
-    getAllUsers
+    getAllUsers,
 }

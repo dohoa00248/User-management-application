@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <p>update</p>
+    </div>
+
+</body>
+
+</html>
+
+<div class="topnav">
+    <!-- <a class="active" href="#home">Home</a> -->
+    <a href="/api/v2/user">Home</a>
+    <a href="/create" class="active">Create A User</a>
+
+</div>
+
+
+<div class="form-add-new">
+    <form action="/api/v2/user/userId/<%= user._id %>?_method=PUT" method="post">
+        <fieldset>
+            <legend>Update-a-user</legend>
+            <div class="input-group">
+                <label for="">Password:</label>
+                <input type="text" name="password" value="<%= user.password %>">
+            </div>
+            <div class="input-group">
+                <label for="">FirstName:</label>
+                <input type="text" name="firstName" value="<%= user.firstName %>">
+            </div>
+            <div class="input-group">
+                <label for="">LastName:</label>
+                <input type="text" name="lastName" value="<%= user.lastName %>">
+            </div>
+            <div>
+                <button>Save</button>
+            </div>
+        </fieldset>
+    </form>
+</div>

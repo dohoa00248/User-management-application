@@ -77,7 +77,7 @@ const findAllUsers = async () => {
         const query = "SELECT * FROM users";
 
         const [users, fields] = await pool.query(query);
-
+        console.log(users);
         return users;
 
     } catch (error) {

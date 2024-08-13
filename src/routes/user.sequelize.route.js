@@ -10,8 +10,8 @@ router.get("/", (req, res) => {
 
 router.post("/create", userController.createUser);
 router.get("/userId/:id", userController.getUserById);
-router.put("/update/:id", userController.updateUser);
-router.delete("/delete/:id", userController.deleteUser);
+router.put("/userId/:id", userController.updateUser);
+router.delete("/userId/:id", userController.deleteUser);
 router.get("/users", userController.getAllUsers);
 
 export default router;

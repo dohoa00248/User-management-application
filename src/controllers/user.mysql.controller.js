@@ -178,8 +178,8 @@ const getAllUsers = async (req, res) => {
     try {
         // Gọi dịch vụ để lấy tất cả người dùng
         const usersArr = await userService.findAllUsers();
-        console.log("Check users:", users);
-        if (!users || users.length === 0) {
+        console.log("Check users:", usersArr);
+        if (!usersArr || usersArr.length === 0) {
             return res.status(404).json({
                 status: false,
                 message: "No users found.",

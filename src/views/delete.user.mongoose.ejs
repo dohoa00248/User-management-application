@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <p>delete</p>
+    </div>
+    <h1>Confirm Deletion</h1>
+    <p>Are you sure you want to delete the user <strong>
+            <%= user.username %>
+        </strong>?</p>
+    <!-- Form to confirm deletion -->
+    <form action="/api/v2/user/userId/<%= user._id %>?_method=DELETE" method="POST">
+        <button type="submit">Yes, Delete</button>
+    </form>
+    <a href="/api/v2/user/">Cancel</a>
+</body>
+
+</html>

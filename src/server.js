@@ -5,6 +5,8 @@ import express from "express";
 import { configDotenv } from "dotenv";
 import routes from "./routes/index.route.js";
 import dbConnect from "./config/db.connect.js";
+import configViewEngine from "./config/view.engine.js";
+import methodOverride from "method-override";
 const app = express();
 
 // Load environment variables from .env file
@@ -18,6 +20,11 @@ const hostname = process.env.HOST_NAME;
 //config req.body midleware
 app.use(express.json()); // for json
 app.use(express.urlencoded({ extended: true })); // for form data
+
+//config viewEngine
+configViewEngine(app);
+
+app.use(methodOverride('_method')); // Để xử lý _method
 
 //config routes
 routes(app);

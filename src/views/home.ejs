@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+
+<body>
+    <div class="topnav">
+        <!-- <a class="active" href="#home">Home</a> -->
+        <!-- thêm / vô đường dẫn link home -->
+        <a class="" href="/">Home</a>
+        <a href="/api/v2/user/create-user">Create User</a>
+
+    </div>
+    <div class="table-container">
+        <!-- <%= JSON.stringify(userList) %> -->
+        <div class="title">List Users</div>
+    </div>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>USERNAME</th>
+            <th>PASSWORD</th>
+            <th>ROLE</th>
+            <th>FIRSTNAME</th>
+            <th>LASTNAME</th>
+        </tr>
+        <tr>
+            <td>a</td>
+            <td>a</td>
+            <td>d</td>
+            <td>b</td>
+            <td>b</td>
+            <td>b</td>
+            <td>
+                <button type="submit">Edit</button>
+                <button type="submit">Delete</button>
+            </td>
+        </tr>
+        <!-- c2 -->
+        <% userList.forEach((user)=> { %>
+            <tr>
+                <td>
+                    <%= user.id %>
+                </td>
+                <td>
+                    <%= user.username %>
+                </td>
+                <td>
+                    <%= user.password %>
+                </td>
+                <td>
+                    <%= user.role %>
+                </td>
+                <td>
+                    <%= user.firstName %>
+                </td>
+                <td>
+                    <%= user.lastName %>
+                </td>
+
+                <td>
+                    <!-- cho nay de lay gia tri id  -->
+                    <a href="/api/v2/user/userId/<%= user._id %>/edit">Edit</a>
+                    <form action="/api/v2/user/userId/<%= user.id %>/delete" method="get">
+                        <button type="submit">Delete</button>
+                    </form>
+
+                </td>
+            </tr>
+            <% }); %>
+
+    </table>
+
+</body>
+
+</html>

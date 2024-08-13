@@ -44,8 +44,8 @@ const findUserById = async (userId) => {
 const findUserByIdAndUpdate = async (userId, userData) => {
     try {
         const { id } = userId;
-        const { firstName, lastName } = userData;
-        const updateUserResult = await User.findByIdAndUpdate(id, { firstName, lastName }, { new: true });
+        const { password, firstName, lastName } = userData;
+        const updateUserResult = await User.findByIdAndUpdate(id, { password, firstName, lastName }, { new: true });
 
         if (!updateUserResult) {
             return;
