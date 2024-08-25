@@ -1,23 +1,25 @@
-import { configDotenv } from "dotenv";
-import { fileURLToPath } from "url";
-import { dirname } from "path";
-import path from "path";
+// import { configDotenv } from "dotenv";
+// import { fileURLToPath } from "url";
+// import { dirname } from "path";
+// import path from "path";
 
-//c1 
-//config đưa tên file name đang đứng -> url
-const __filename = fileURLToPath(import.meta.url)
-// console.log(__filename);
-// get name_url chứa file đó
-const __dirname = dirname(__filename);
-// console.log(__dirname);
-//config đường dẫn đến file .env
-const dotenvPath = path.join(__dirname, "../../.env");
+// //c1 
+// //config đưa tên file name đang đứng -> url
+// const __filename = fileURLToPath(import.meta.url)
+// // console.log(__filename);
+// // get name_url chứa file đó
+// const __dirname = dirname(__filename);
+// // console.log(__dirname);
+// //config đường dẫn đến file .env
+// const dotenvPath = path.join(__dirname, "../../.env");
 
-configDotenv({ path: dotenvPath });
+// configDotenv({ path: dotenvPath });
 
 //c2
 // configDotenv({ path: '../../.env' });
-
+import { configDotenv } from "dotenv";
+configDotenv();
+// console.log(process.env);
 import mysql2 from "mysql2/promise";
 // Tạo pool kết nối với MySQL
 const pool = mysql2.createPool({

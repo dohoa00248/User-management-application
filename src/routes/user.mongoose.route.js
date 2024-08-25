@@ -15,7 +15,8 @@ import userService from "../services/user.mongoose.service.js";
 import User from "../models/user.mongoose.model.js";
 const router = express.Router();
 
-router.get("/", userController.getHomeUserPage);
+// router.get("/", userController.getHomeUserPage);
+
 // router.get("/", async (req, res) => {
 //     // res.send("Hello! userpage12");
 //     const users = await userService.findAllUsers();
@@ -50,7 +51,7 @@ router.put("/userId/:id", async (req, res) => {
         if (!user) {
             return res.status(404).send('User not found');
         }
-        res.redirect('/api/v2/user');
+        res.redirect('/');
     } catch (err) {
         res.status(500).send(err.message);
     }
@@ -72,7 +73,7 @@ router.get("/userId/:id/delete", async (req, res) => {
 router.delete('/userId/:id', async (req, res) => {
     try {
         await User.findByIdAndDelete(req.params.id);
-        res.redirect('/api/v2/user');
+        res.redirect('/');
     } catch (err) {
         res.status(500).send(err.message);
     }

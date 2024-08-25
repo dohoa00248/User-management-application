@@ -1,17 +1,20 @@
+// import { configDotenv } from "dotenv";
+// import { fileURLToPath } from 'url';
+// import { dirname } from "path";
+// import path from "path";
+
+// const __filename = fileURLToPath(import.meta.url);
+// // console.log("Check __filename", __filename);
+// const __dirname = dirname(__filename);
+// // console.log("Check __dirname", __dirname);
+// // Xây dựng đường dẫn tuyệt đối tới file .env
+// const dotenvPath = path.join(__dirname, "../../.env")
+// // console.log("Check dotenvPath", dotenvPath);
+// configDotenv({ path: dotenvPath });
+
 import { configDotenv } from "dotenv";
-import { fileURLToPath } from 'url';
-import { dirname } from "path";
-import path from "path";
-
-const __filename = fileURLToPath(import.meta.url);
-// console.log("Check __filename", __filename);
-const __dirname = dirname(__filename);
-// console.log("Check __dirname", __dirname);
-// Xây dựng đường dẫn tuyệt đối tới file .env
-const dotenvPath = path.join(__dirname, "../../.env")
-// console.log("Check dotenvPath", dotenvPath);
-configDotenv({ path: dotenvPath });
-
+configDotenv();
+// console.log(process.env);
 import { MongoClient } from "mongodb";
 const connectToMongoDB = async () => {
     try {
@@ -49,7 +52,7 @@ const connectToMySQL = async () => {
         console.log("Failed to connect to MySQL", error.message);
     }
 };
-
+connectToMySQL();
 import { sequelize } from "./db.config.js";
 const connectToMySQLBySequelize = async () => {
     try {
