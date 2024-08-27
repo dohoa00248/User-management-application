@@ -72,12 +72,13 @@ const getUserById = async (req, res) => {
         else {
             console.log("User found successfully.");
             console.log("User:", userById);
-
+            // res.render('update.user.mongoose.ejs', { userById });
             return res.status(200).json({
                 status: true,
                 message: "User found successfully.",
                 user: userById
             });
+
         }
 
     } catch (error) {
@@ -115,11 +116,13 @@ const updateUser = async (req, res) => {
         }
 
         console.log("User updated successfully.");
-        return res.status(200).json({
-            status: true,
-            message: "User updated successfully.",
-            user: updateUserResult
-        });
+        res.redirect('/');
+        // return res.status(200).json({
+        //     status: true,
+        //     message: "User updated successfully.",
+        //     user: updateUserResult
+        // });
+
 
     } catch (error) {
 
@@ -145,15 +148,14 @@ const deleteUser = async (req, res) => {
                 error: "User not found."
             });
         }
+        console.log("User deleted successfully.");
+        return res.redirect('/');
+        // res.status(200).json({
+        //     status: true,
+        //     message: "User deleted successfully.",
+        //     user: deleteUserResult
+        // });
 
-        else {
-            console.log("User deleted successfully.");
-            res.status(200).json({
-                status: true,
-                message: "User deleted successfully.",
-                user: deleteUserResult
-            });
-        }
     } catch (error) {
         // console.log("Error:", error.message);
         res.status(500).json({
@@ -193,6 +195,82 @@ const getAllUsers = async (req, res) => {
     }
 }
 
+const getUpdatePage = async (req, res) => {
+    try {
+        //c1
+        const { id } = req.params;
+        const userId = { id }; // Sử dụng req.params thay vì req.body vì ID được truyền qua URL
+        console.log(userId);
+        const userById = await userService.findUserById(userId);
+
+        if (!userById) {
+            console.log("User not found.");
+            return res.status(404).json({
+                status: false,
+                message: "User not found.",
+                user: {}
+            });
+        }
+        else {
+            console.log("User found successfully.");
+            console.log("User:", userById);
+            return res.render('update.user.mongoose.ejs', { user: userById });
+            // return res.status(200).json({
+            //     status: true,
+            //     message: "User found successfully.",
+            //     user: userById
+            // });
+
+        }
+
+    } catch (error) {
+        console.log("Failed to find user by ID.", error.message);
+        return res.status(500).json({
+            status: false,
+            message: "Internal Server Error",
+            error: error.message
+        });
+    }
+}
+
+const getDeletePage = async (req, res) => {
+    try {
+        //c1
+        const { id } = req.params;
+        const userId = { id }; // Sử dụng req.params thay vì req.body vì ID được truyền qua URL
+        console.log(userId);
+        const userById = await userService.findUserById(userId);
+
+        if (!userById) {
+            console.log("User not found.");
+            return res.status(404).json({
+                status: false,
+                message: "User not found.",
+                user: {}
+            });
+        }
+        else {
+            console.log("User found successfully.");
+            console.log("User:", userById);
+            return res.render('delete.user.mongoose.ejs', { user: userById });
+            // return res.status(200).json({
+            //     status: true,
+            //     message: "User found successfully.",
+            //     user: userById
+            // });
+
+        }
+
+    } catch (error) {
+        console.log("Failed to find user by ID.", error.message);
+        return res.status(500).json({
+            status: false,
+            message: "Internal Server Error",
+            error: error.message
+        });
+    }
+}
+
 export default {
     getHomeUserPage,
     createUser,
@@ -200,4 +278,6 @@ export default {
     updateUser,
     deleteUser,
     getAllUsers,
+    getUpdatePage,
+    getDeletePage
 }

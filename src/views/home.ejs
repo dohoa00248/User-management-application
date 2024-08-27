@@ -65,8 +65,10 @@
 
                 <td>
                     <!-- cho nay de lay gia tri id  -->
-                    <a href="/api/v2/user/userId/<%= user._id %>/edit">Edit</a>
-                    <form action="/api/v2/user/userId/<%= user.id %>/delete" method="get">
+                    <form action="/api/v2/user/update/userId/<%= user._id %>" method="get">
+                        <button type="submit">Edit</button>
+                    </form>
+                    <form action="/api/v2/user/delete/userId/<%= user._id %>" method="get">
                         <button type="submit">Delete</button>
                     </form>
 
