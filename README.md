@@ -1,1 +1,1 @@
-# rename .env.example to .env and npm start in terminal
+# rename .env.example to .env and npm start in terminal to run app
