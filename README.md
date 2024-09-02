@@ -42,7 +42,7 @@ DB_NAME=test
 
 # MongoDB configuration
 
-DB_MONGODB_URL=mongodb+srv://admin:bLw2SRf87epZSnfe@cluster0.7w5uepz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+DB_MONGODB_URL=mongodb+srv://admin:npfs7VrY9STafXLO@cluster0.7w5uepz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 DB_MONGODB_URL_HOST=mongodb://localhost:27017
 DB_MONGODB_NAME=abc
 
