@@ -19,6 +19,39 @@ To set up and run the project locally, follow these steps:
    git clone https://github.com/yourusername/yourproject.git
    ```
 2. **Navigate to the Project Directory:**
+   cd yourproject
 3. **Install Dependencies:**
+   npm install
 4. **Set Up Environment Variables: Create a .env file in the root directory based on the .env.example file provided. The .env file should contain the following variables:**
-5.
+
+# Environment mode (development or production)
+
+NODE_ENV=development
+
+# Server configuration
+
+PORT=3000
+HOST_NAME=localhost
+
+# Database configuration
+
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=
+DB_NAME=test
+
+# MongoDB configuration
+
+DB_MONGODB_URL=mongodb+srv://admin:bLw2SRf87epZSnfe@cluster0.7w5uepz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+DB_MONGODB_URL_HOST=mongodb://localhost:27017
+DB_MONGODB_NAME=abc
+
+5. **Run the Application: Use the following command to start the application in development mode:**
+   npm run start
+
+## Usage
+
+Testing with Postman
+Start the Application: Ensure that the server is running by using the npm run start command.
+
+Open Postman: Launch Postman or any other API testing tool.
