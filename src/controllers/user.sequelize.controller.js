@@ -198,7 +198,7 @@ const getAllUsers = async (req, res) => {
         res.status(200).json({
             status: true,
             message: "Successfully retrieved users.",
-            usersList: usersArr
+            users: usersArr
         });
     } catch (error) {
         // console.log("Error:", error);

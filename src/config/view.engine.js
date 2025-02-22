@@ -6,10 +6,10 @@ import express from "express";
 //c1 
 //config đưa tên file name đang đứng -> url
 const __filename = fileURLToPath(import.meta.url)
-console.log(__filename);
+// console.log(__filename);
 // get name_url chứa file đó
 const __dirname = dirname(__filename);
-console.log(__dirname);
+// console.log(__dirname);
 
 const configViewEngine = (app) => {
     app.set("views", path.join("./src", "views"))

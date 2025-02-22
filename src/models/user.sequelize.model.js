@@ -43,14 +43,14 @@ const User = sequelize.define('User', {
 export default User;
 
 // dong bo tạo bang
-// const synchronizeModels = async () => {
-//     try {
-//         // Synchronize all defined models to the database
-//         await sequelize.sync({ alter: true }); // Use { alter: true } to avoid dropping tables
-//         console.log('All models were synchronized successfully.');
-//     } catch (error) {
-//         console.error('Error synchronizing models:', error.message);
-//     }
-// }
+const synchronizeModels = async () => {
+    try {
+        // Synchronize all defined models to the database
+        await sequelize.sync({ alter: true }); // Use { alter: true } to avoid dropping tables
+        console.log('All models were synchronized successfully.');
+    } catch (error) {
+        console.error('Error synchronizing models:', error.message);
+    }
+}
 
-// synchronizeModels();
+synchronizeModels();
