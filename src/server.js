@@ -14,7 +14,7 @@ configDotenv();
 // console.log("Check env", process.env);
 
 //config hostname, port for app
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 const hostname = process.env.HOST_NAME;
 
 //config req.body midleware
@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: true })); // for form data
 //config viewEngine
 configViewEngine(app);
 
-app.use(methodOverride('_method')); // Để xử lý _method
+app.use(methodOverride("_method")); // Để xử lý _method
 
 //config routes
 routes(app);
@@ -41,5 +41,5 @@ dbConnect.connectToMySQLBySequelize();
 dbConnect.synchronizeModels();
 
 app.listen(port, hostname, () => {
-    console.log(`Server is running on http://${hostname}:${port}`);
+  console.log(`Server is running on http://${hostname}:${port}`);
 });
