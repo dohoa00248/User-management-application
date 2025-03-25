@@ -1,83 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="/css/home.css">
-</head>
+    <link rel="stylesheet" href="/css/home.css" />
+  </head>
 
-<body>
+  <body>
     <div class="topnav">
-        <!-- <a class="active" href="#home">Home</a> -->
-        <!-- thêm / vô đường dẫn link home -->
-        <a class="" href="/">Home</a>
-        <a href="/api/v2/user/create-user">Create User</a>
-
+      <!-- <a class="active" href="#home">Home</a> -->
+      <!-- thêm / vô đường dẫn link home -->
+      <a class="" href="/">Home</a>
+      <a href="/api/v2/user/create-user">Create User</a>
     </div>
     <div class="table-container">
-        <!-- <%= JSON.stringify(users) %> -->
-        <div class="title">List Users</div>
+      <!-- <%= JSON.stringify(users) %> -->
+      <div class="title">List Users</div>
     </div>
-    <table>
+    <table style="background-color: aqua">
+      <thead>
         <tr>
-            <th>ID</th>
-            <th>USERNAME</th>
-            <th>PASSWORD</th>
-            <th>ROLE</th>
-            <th>FIRSTNAME</th>
-            <th>LASTNAME</th>
+          <th>id</th>
+          <th>username</th>
+          <th>password</th>
+          <th>role</th>
+          <th>firstname</th>
+          <th>lastname</th>
+          <th>action</th>
         </tr>
-        <tr>
-            <td>a</td>
-            <td>a</td>
-            <td>d</td>
-            <td>b</td>
-            <td>b</td>
-            <td>b</td>
-            <td>
-                <button type="submit">Edit</button>
-                <button type="submit">Delete</button>
-            </td>
-        </tr>
+      </thead>
+      <tbody>
         <!-- c2 -->
         <% users.forEach((user)=> { %>
-            <tr>
-                <td>
-                    <%= user.id %>
-                </td>
-                <td>
-                    <%= user.username %>
-                </td>
-                <td>
-                    <%= user.password %>
-                </td>
-                <td>
-                    <%= user.role %>
-                </td>
-                <td>
-                    <%= user.firstName %>
-                </td>
-                <td>
-                    <%= user.lastName %>
-                </td>
-
-                <td>
-                    <!-- cho nay de lay gia tri id  -->
-                    <form action="/api/v2/user/update/userId/<%= user._id %>" method="get">
-                        <button type="submit">Edit</button>
-                    </form>
-                    <form action="/api/v2/user/delete/userId/<%= user._id %>" method="get">
-                        <button type="submit">Delete</button>
-                    </form>
-
-                </td>
-            </tr>
-            <% }); %>
-
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= user.username %></td>
+          <td><%= user.password %></td>
+          <td><%= user.role %></td>
+          <td><%= user.firstName %></td>
+          <td><%= user.lastName %></td>
+          <td>
+            <!-- cho nay de lay gia tri id  -->
+            <form
+              action="/api/v2/user/update/userId/<%= user._id %>"
+              method="get"
+            >
+              <button type="submit">Edit</button>
+            </form>
+            <form
+              action="/api/v2/user/delete/userId/<%= user._id %>"
+              method="get"
+            >
+              <button type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
     </table>
-
-</body>
-
+  </body>
 </html>
