@@ -15,7 +15,7 @@ configDotenv();
 
 //config hostname, port for app
 const port = process.env.PORT || 3000;
-const hostname = process.env.HOST_NAME;
+const hostname = process.env.HOST_NAME || "localhost";
 
 //config req.body midleware
 app.use(express.json()); // for json
