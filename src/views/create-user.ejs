@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/home.css" />
+  </head>
+
+  <body>
+    <!-- <div>
+        <p>create</p>
+    </div> -->
+    <div class="topnav">
+      <!-- <a class="active" href="#home">Home</a> -->
+      <!-- thêm / vô đường dẫn link home -->
+      <a href="/">Home</a>
+      <a href="/create" class="active">Create User</a>
+    </div>
+    <div class="form-add-new">
+      <form action="/api/v2/user/create" method="post">
+        <fieldset>
+          <legend>Create-a-user</legend>
+          <div class="input-group">
+            <label for="">Username:</label>
+            <input type="text" name="username" />
+          </div>
+          <div class="input-group">
+            <label for="">Password:</label>
+            <input type="text" name="password" />
+          </div>
+          <div>
+            <button>Save</button>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </body>
+</html>
