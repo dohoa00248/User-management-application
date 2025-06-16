@@ -16,7 +16,15 @@ import userService from '../services/user.mongoose.service.js';
 import User from '../models/user.mongoose.model.js';
 const router = express.Router();
 
-router.get('/', userController.getHomeUserPage);
+router.get('/', auth.authSignin, userController.getHomeUserPage);
+
+router.get('/admin/dashboard', auth.authSignin, async (req, res) => {
+  const users = await userService.findAllUsers();
+  return res.render('dashboard', {
+    userList: users,
+    user: req.session.user,
+  });
+});
 
 // router.get("/", async (req, res) => {
 //     // res.send("Hello! userpage12");

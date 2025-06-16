@@ -85,7 +85,7 @@ const updateUser = async (req, res) => {
 
     if (!updateUserResult) {
       console.log('Failed to update user.');
-      return res.status(400).render('users', {
+      return res.status(400).render('dashboard', {
         status: false,
         message: 'Failed to update user.',
         error: 'Invalid or duplicate data or User not found.',
@@ -99,14 +99,14 @@ const updateUser = async (req, res) => {
     res.render('dashboard', {
       status: true,
       message: 'User updated successfully.',
-      users: allUsers,
+      userList: allUsers,
     });
   } catch (error) {
     res.status(500).render('dashboard', {
       status: false,
       message: 'Internal Server Error',
       error: error.message,
-      users: [],
+      userList: [],
     });
   }
 };
@@ -119,11 +119,11 @@ const deleteUser = async (req, res) => {
 
     if (!deleteUserResult) {
       console.log('Failed to delete user or user not found.');
-      return res.status(404).render('users', {
+      return res.status(404).render('dashboard', {
         status: false,
         message: 'Failed to delete user.',
         error: 'User not found.',
-        users: [],
+        userList: [],
       });
     }
 
@@ -133,14 +133,14 @@ const deleteUser = async (req, res) => {
     return res.render('dashboard', {
       status: true,
       message: 'User deleted successfully.',
-      users: allUsers,
+      userList: allUsers,
     });
   } catch (error) {
     res.status(500).render('dashboard', {
       status: false,
       message: 'Internal Server Error',
       error: error.message,
-      users: [],
+      userList: [],
     });
   }
 };
@@ -153,14 +153,14 @@ const getAllUsers = async (req, res) => {
       return res.status(404).json({
         status: false,
         message: 'No users found',
-        users: [],
+        userList: [],
       });
     }
 
     res.status(200).json({
       status: true,
       message: 'Users retrieved successfully',
-      users: usersArray,
+      userList: usersArray,
     });
   } catch (error) {
     console.log('Internal Server Error', error.message);

@@ -38,7 +38,7 @@ router.post('/signin', async (req, res) => {
     req.session.user = user;
     console.log(req.session);
 
-    return res.redirect('/admin/dashboard');
+    return res.redirect('/api/v2/user/admin/dashboard');
   } catch (err) {
     console.error(err);
     return res.status(500).render('signin.ejs', {

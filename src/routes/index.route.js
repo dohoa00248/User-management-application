@@ -7,6 +7,7 @@ import homeRouter from './home.route.js';
 
 const routes = (app) => {
   app.use('/', homeRouter);
+  app.use('/api/v1/auth', authRouter);
   app.use('/api/v1/user', userRouterMongoDB);
   app.use('/api/v2/user', userRouterMongoose);
   app.use('/api/v3/user', userRouterMysql);
