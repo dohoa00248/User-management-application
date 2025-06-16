@@ -34,6 +34,21 @@
           <a href="/api/v2/user/create-user" class="btn btn-outline-light"
             >+ Create User</a
           >
+          <form
+            action="/api/v2/user/users/search"
+            method="get"
+            class="d-flex mb-3"
+          >
+            <input
+              type="text"
+              name="query"
+              class="form-control me-2"
+              placeholder="Search username or email"
+              required
+            />
+            <button type="submit" class="btn btn-primary">🔍 Search</button>
+          </form>
+
           <a href="/api/v1/auth/signout" class="btn btn-outline-danger"
             >Sign Out</a
           >
@@ -43,7 +58,7 @@
 
     <div class="container mt-5">
       <h2 class="mb-4">List of Users</h2>
-      <% if (users.length === 0) { %>
+      <% if (userList.length === 0) { %>
       <div class="alert alert-info">No users found.</div>
       <% } else { %>
       <div class="table-responsive">
@@ -60,7 +75,7 @@
             </tr>
           </thead>
           <tbody>
-            <% users.forEach((user) => { %>
+            <% userList.forEach((user) => { %>
             <tr>
               <td><%= user.id %></td>
               <td><%= user.username %></td>

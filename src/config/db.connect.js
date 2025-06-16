@@ -1,18 +1,6 @@
-// import { configDotenv } from "dotenv";
-// import { fileURLToPath } from 'url';
-// import { dirname } from "path";
-// import path from "path";
-
-// const __filename = fileURLToPath(import.meta.url);
-// // console.log("Check __filename", __filename);
-// const __dirname = dirname(__filename);
-// // console.log("Check __dirname", __dirname);
-// // Xây dựng đường dẫn tuyệt đối tới file .env
-// const dotenvPath = path.join(__dirname, "../../.env")
-// // console.log("Check dotenvPath", dotenvPath);
-// configDotenv({ path: dotenvPath });
 
 import dotenv from 'dotenv';
+import mongoose from 'mongoose';
 dotenv.config();
 // console.log(process.env);
 import { MongoClient } from 'mongodb';
@@ -31,7 +19,7 @@ const connectToMongoDB = async () => {
   }
 };
 
-import mongoose from 'mongoose';
+
 const connectToMongoDBByMongoose = async () => {
   try {
     const mongodbUri = process.env.DB_MONGODB_URL;

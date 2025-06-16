@@ -50,7 +50,7 @@ routes(app);
 //     res.send("Hello admin");
 // })
 
-//Connect to database
+//Connect to databasea
 dbConnect.connectToMongoDB();
 dbConnect.connectToMongoDBByMongoose();
 dbConnect.connectToMySQL();
