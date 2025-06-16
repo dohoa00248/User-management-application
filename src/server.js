@@ -8,6 +8,7 @@ import dbConnect from './config/db.connect.js';
 import configViewEngine from './config/view.engine.js';
 import methodOverride from 'method-override';
 import session from 'express-session';
+import MongoStore from 'connect-mongo';
 const app = express();
 
 // Load environment variables from .env file
