@@ -23,17 +23,24 @@ app.use(express.json()); // for json
 app.use(express.urlencoded({ extended: true })); // for form data
 app.use(
   session({
-    secret: '123', // nên để trong biến môi trường .env
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false }, // nếu dùng HTTPS thì để true
+    store: MongoStore.create({
+      mongoUrl: process.env.DB_MONGODB_URL,
+      ttl: 60 * 60,
+    }),
+    cookie: {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60,
+    },
   })
 );
 
 //config viewEngine
 configViewEngine(app);
 
-app.use(methodOverride('_method')); // Để xử lý _method
+app.use(methodOverride('_method'));
 
 //config routes
 routes(app);
