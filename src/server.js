@@ -50,11 +50,11 @@ routes(app);
 // })
 
 //Connect to databasea
-dbConnect.connectToMongoDB();
+// dbConnect.connectToMongoDB();
 dbConnect.connectToMongoDBByMongoose();
-dbConnect.connectToMySQL();
-dbConnect.connectToMySQLBySequelize();
-dbConnect.synchronizeModels();
+// dbConnect.connectToMySQL();
+// dbConnect.connectToMySQLBySequelize();
+// dbConnect.synchronizeModels();
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
