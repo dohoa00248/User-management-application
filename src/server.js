@@ -17,11 +17,10 @@ configDotenv();
 
 //config hostname, port for app
 const port = process.env.PORT || 3000;
-const hostname = process.env.HOST_NAME || 'localhost';
 
 //config req.body midleware
-app.use(express.json()); // for json
-app.use(express.urlencoded({ extended: true })); // for form data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -57,6 +56,6 @@ dbConnect.connectToMySQL();
 dbConnect.connectToMySQLBySequelize();
 dbConnect.synchronizeModels();
 
-app.listen(port, hostname, () => {
+app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
